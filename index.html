@@ -10,8 +10,13 @@
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
 
-        // 
-        
+        // Let's try and create a div element (named in camel case) to represent the inbox
+
+        var inBox = document.createElement('div')
+        // Setting the ID attirbute to inbox for easier finding later
+        inBox.id = 'inbox';
+        //appending the element to the body of document's body
+        document.body.appendChild(inBox);
       };
     </script>
 	</head>
