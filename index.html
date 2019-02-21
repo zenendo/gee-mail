@@ -27,8 +27,19 @@
             var inbox = document.getElementById("inbox");
             inbox.appendChild(messageEnvelope);
 
-
-        };
+            //Now let's create a date stamp to put on / in  the envelope.  It should look like this I think.
+            // <div class="date">
+            //     1/2/19
+            // </div>
+            var dateStamp = document.createElement('div');
+            //Let's call this date stamp container the date
+            dateStamp.className = 'date';
+            // Let's put a date inside of that dateStamp
+            dateStamp.innerHTML = messageDate;
+            // Let's put the date on that envelope buddy yeah
+            messageEnvelope.appendChild(dateStamp);
+           
+            };
 
     </script>
 	</head>
