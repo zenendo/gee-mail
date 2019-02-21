@@ -64,6 +64,15 @@
             messageContent.innerHTML = messageBody;
             messageEnvelope.appendChild(messageContent)
 
+             //Let's count all of the messages
+            var numMessages = window.geemails.length;
+            var messageCount = document.getElementById("message-count");
+            messageCount.innerHTML = 'Messages: ' + numMessages;
+
+            //every 5 seconds, lets perform this function and get new mail
+            setInterval(function(){
+            window.getNewMessage()
+                }, 5000)
             };
 
     </script>
@@ -71,8 +80,13 @@
 	<body>
 		<div class="container" id="main">
             <!--This is our inbox that we can put our envelopes in-->
+           
+
+            <div id="message-count">    
+
+            </div>
             <div id="inbox">
-             
+
             </div>
 		</div>
 	</body>
