@@ -10,19 +10,21 @@
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
 
-        // Let's try and create a div element (named in camel case) to represent the inbox
+        //Let's try this again.  Instead we're going to loop through all of the messages and grab their attributes
+        for (var i = 0; i < window.geemails.length; i++) {
+        //reference starts at the first message
+            var message = window.geemails[i];
+            var messageSubject = message.subject;
+            var messageSender = message.sender;
+            var messageBody = message.body;
+            var messageDate = message.date;
+        };
 
-        var inBox = document.createElement('div')
-        // Setting the ID attirbute to inbox for easier finding later
-        inBox.id = 'inbox';
-        //appending the element to the body of document's body
-        document.body.appendChild(inBox);
-      };
     </script>
 	</head>
 	<body>
 		<div class="container" id="main">
-			Build Me!
+            // Put objects here later
 		</div>
 	</body>
 </html>
