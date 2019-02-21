@@ -39,6 +39,31 @@
             // Let's put the date on that envelope buddy yeah
             messageEnvelope.appendChild(dateStamp);
            
+            // Now let's create a subject line to put on the envelope
+            // <div class="subject">
+            //     RE:How to write javascript for dummies
+            // </div>
+
+            var subjectLine = document.createElement('div');
+            //Creating a class called subject for the subject line
+            subjectLine.className = 'subject';
+            //sticking the actual suject line in the tag
+            subjectLine.innerHTML = 'Subject: ' + messageSubject;
+            //Now we stick it back on the envelope
+            messageEnvelope.appendChild(subjectLine)
+            
+            //Now we do the same thing to for the sender
+            var senderName = document.createElement('div');
+            senderName.className = 'sender';
+            senderName.innerHTML = 'From: ' + messageSender;
+            messageEnvelope.appendChild(senderName)
+
+            //And one for the body content as well
+            var messageContent = document.createElement('div');
+            messageContent.className = 'messageContent';
+            messageContent.innerHTML = messageBody;
+            messageEnvelope.appendChild(messageContent)
+
             };
 
     </script>
