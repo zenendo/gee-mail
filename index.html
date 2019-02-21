@@ -18,13 +18,26 @@
             var messageSender = message.sender;
             var messageBody = message.body;
             var messageDate = message.date;
+         // now that we have our messages, we need a envelopes to put them in
+
+            var messageEnvelope = document.createElement('div');
+            //Let's create a class name for styling and making it easier to grab later
+            messageEnvelope.className = 'envelopedMessage';
+            //Let's put our envelopes in our inbox
+            var inbox = document.getElementById("inbox");
+            inbox.appendChild(messageEnvelope);
+
+
         };
 
     </script>
 	</head>
 	<body>
 		<div class="container" id="main">
-            // Put objects here later
+            <!--This is our inbox that we can put our envelopes in-->
+            <div id="inbox">
+             
+            </div>
 		</div>
 	</body>
 </html>
