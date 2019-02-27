@@ -1,7 +1,9 @@
 .envelopedMessage{
-  border: 1px solid black;
+  border: 2px solid black;
 }
+
 h1  {
-	color: #fff;
-	background-color: DarkCyan;
+  background-color:#00ff00;
+  color: #000;
+  font-size: 300%;
 }
