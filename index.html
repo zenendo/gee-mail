@@ -1,7 +1,7 @@
 <html>
-	<head>
-		<script src="js/mail-generator.js"></script>
-		<link href="css/style.css" rel="stylesheet" media="screen">
+    <head>
+        <script src="js/mail-generator.js"></script>
+        <link href="css/style.css" rel="stylesheet" media="screen">
     <h1> <center> Zen's Super Basic Gee Mail </h1>
     <center><br><b>Inbox</b></br> </center>
 
@@ -10,7 +10,7 @@
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
         var numMessages = 0;
-        //Let's try this again.  Instead we're going to create new messages
+        //Let's try this again.  Instead we're going to loop through and create new messages
         for (var i = 0; i < window.geemails.length; i++) {
         //reference starts at the first message
             var message = window.geemails[i];
@@ -25,18 +25,18 @@
               addMessageCount();
             }, 5000);
         
-            // This is a function to create the message with certain attributes
+                        
             function createNewMessage(message, isNew) {
                 var messageSubject = message.subject;
                 var messageSender = message.sender;
                 var messageBody = message.body;
                 var messageDate = message.date;
-            
-            // now that we have our messages, we need a envelopes to put them in
-            var messageEnvelope = document.createElement('div');
-            //Let's create a class name for styling and making it easier to grab later
-            messageEnvelope.className = 'envelopedMessage';
-            var id = "message-" + i
+             // now that we have our messages, we need a envelopes to put them in
+
+                var messageEnvelope = document.createElement('div');
+                //Let's create a class name for styling and making it easier to grab later
+                messageEnvelope.className = 'envelopedMessage';
+                var id = "message-" + i
                 messageEnvelope.id = id
                 messageEnvelope.addEventListener("click", function(e) {
                   var id = this.id
@@ -46,74 +46,76 @@
                   messageBody.innerHTML += "<hr/>"
                   messageBody.innerHTML += message
                 });
-            //Let's put our envelopes in our inbox
-            var inbox = document.getElementById("inbox");
-            if(isNew) {
-                inbox.prepend(messageEnvelope);
-            } else {
-                inbox.appendChild(messageEnvelope);
+                //Let's put our envelopes in our inbox
+                var inbox = document.getElementById("inbox");
+                if(isNew) {
+                  inbox.prepend(messageEnvelope);
+                } else {
+                  inbox.appendChild(messageEnvelope);
+                }
+
+                //Now let's create a date stamp to put on / in  the envelope.  It should look like this I think.
+                // <div class="date">
+                //     1/2/19
+                // </div>
+                var dateStamp = document.createElement('div');
+                //Let's call this date stamp container the date
+                dateStamp.className = 'date';
+                // Let's put a date inside of that dateStamp
+                dateStamp.innerHTML = messageDate;
+                // Let's put the date on that envelope buddy yeah
+                messageEnvelope.appendChild(dateStamp);
+
+                // Now let's create a subject line to put on the envelope
+                // <div class="subject">
+                //     RE:How to write javascript for dummies
+                // </div>
+
+                var subjectLine = document.createElement('div');
+                //Creating a class called subject for the subject line
+                subjectLine.className = 'subject';
+                //sticking the actual suject line in the tag
+                subjectLine.innerHTML = 'Subject: ' + messageSubject;
+                //Now we stick it back on the envelope
+                messageEnvelope.appendChild(subjectLine)
+
+                //Now we do the same thing to for the sender
+                var senderName = document.createElement('div');
+                senderName.className = 'sender';
+                senderName.innerHTML = 'From: ' + messageSender;
+                messageEnvelope.appendChild(senderName)
+
+                //And one for the body content as well
+                var messageContent = document.createElement('div');
+                messageContent.className = 'messageContent';
+                messageContent.style = "display:none;";
+                messageContent.innerHTML = messageBody;
+                messageEnvelope.appendChild(messageContent)
             }
-
-            //Now let's create a date stamp to put on / in  the envelope.  It should look like this I think.
-            // <div class="date">
-            //     1/2/19
-            // </div>
-            var dateStamp = document.createElement('div');
-            //Let's call this date stamp container the date
-            dateStamp.className = 'date';
-            // Let's put a date inside of that dateStamp
-            dateStamp.innerHTML = messageDate;
-            // Let's put the date on that envelope buddy yeah
-            messageEnvelope.appendChild(dateStamp);
-           
-            // Now let's create a subject line to put on the envelope
-            // <div class="subject">
-            //     RE:How to write javascript for dummies
-            // </div>
-
-            var subjectLine = document.createElement('div');
-            //Creating a class called subject for the subject line
-            subjectLine.className = 'subject';
-            //sticking the actual suject line in the tag
-            subjectLine.innerHTML = 'Subject: ' + messageSubject;
-            //Now we stick it back on the envelope
-            messageEnvelope.appendChild(subjectLine)
-            
-            //Now we do the same thing to for the sender
-            var senderName = document.createElement('div');
-            senderName.className = 'sender';
-            senderName.innerHTML = 'From: ' + messageSender;
-            messageEnvelope.appendChild(senderName)
-
-            //And one for the body content as well
-            var messageContent = document.createElement('div');
-            messageContent.className = 'messageContent';
-            messageContent.style = "display:none;";
-            messageContent.innerHTML = messageBody;
-            messageEnvelope.appendChild(messageContent)
-            }
-
+        
             function addMessageCount() {
-             //Let's count all of the messages
-            numMessages = numMessages + 1;
-            var messageCount = document.getElementById("message-count");
-            messageCount.innerHTML = 'Messages: ' + numMessages;
+                //Let's count all of the messages
+                numMessages = numMessages + 1;
+                var messageCount = document.getElementById("message-count");
+                messageCount.innerHTML = 'Messages: ' + numMessages;
             }
         };
 
     </script>
-	</head>
-	<body>
-		<div class="container" id="main">
+    </head>
+    <body>
+        <div class="container" id="main">
             <!--This is our inbox that we can put our envelopes in-->
-           
-
             <div id="message-count">    
 
             </div>
-            <div id="inbox">
-
+            <div id="main-container">
+              <div id="inbox">
+              </div>
+              <div id="messageBody">
+              </div>
             </div>
-		</div>
-	</body>
+            
+        </div>
+    </body>
 </html>
