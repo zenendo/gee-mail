@@ -17,3 +17,27 @@ div {
 .subject {
   font-weight: bold;
 }
+
+#main-container{
+  height:100%;
+  width:100%;
+}
+
+#messageBody {
+  border:1px solid black;
+  margin-left:20px;
+  padding:10px;
+  background-color:#D3D3D3;
+  min-height:205px;
+}
+
+#inbox {
+  float:left;
+  width: 50%;
+  margin-right:20px;
+}
+
+#main{
+  width:75%;
+  margin: 0 auto;
+}
