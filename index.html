@@ -88,15 +88,18 @@
             //And one for the body content as well
             var messageContent = document.createElement('div');
             messageContent.className = 'messageContent';
+            messageContent.style = "display:none;";
             messageContent.innerHTML = messageBody;
             messageEnvelope.appendChild(messageContent)
+            }
 
+            function addMessageCount() {
              //Let's count all of the messages
-            var numMessages = window.geemails.length;
+            numMessages = numMessages + 1;
             var messageCount = document.getElementById("message-count");
             messageCount.innerHTML = 'Messages: ' + numMessages;
-        }
-
+            }
+        };
 
     </script>
 	</head>
