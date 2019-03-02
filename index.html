@@ -26,7 +26,12 @@
             }, 5000);
         
             // now that we have our messages, we need a envelopes to put them in
-
+            function createNewMessage(message, isNew) {
+                var messageSubject = message.subject;
+                var messageSender = message.sender;
+                var messageBody = message.body;
+                var messageDate = message.date;
+                
             var messageEnvelope = document.createElement('div');
             //Let's create a class name for styling and making it easier to grab later
             messageEnvelope.className = 'envelopedMessage';
