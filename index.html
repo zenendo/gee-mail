@@ -48,7 +48,11 @@
                 });
             //Let's put our envelopes in our inbox
             var inbox = document.getElementById("inbox");
-            inbox.appendChild(messageEnvelope);
+            if(isNew) {
+                inbox.prepend(messageEnvelope);
+            } else {
+                inbox.appendChild(messageEnvelope);
+            }
 
             //Now let's create a date stamp to put on / in  the envelope.  It should look like this I think.
             // <div class="date">
