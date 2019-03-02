@@ -25,16 +25,27 @@
               addMessageCount();
             }, 5000);
         
-            // now that we have our messages, we need a envelopes to put them in
+            // This is a function to create the message with certain attributes
             function createNewMessage(message, isNew) {
                 var messageSubject = message.subject;
                 var messageSender = message.sender;
                 var messageBody = message.body;
                 var messageDate = message.date;
-                
+            
+            // now that we have our messages, we need a envelopes to put them in
             var messageEnvelope = document.createElement('div');
             //Let's create a class name for styling and making it easier to grab later
             messageEnvelope.className = 'envelopedMessage';
+            var id = "message-" + i
+                messageEnvelope.id = id
+                messageEnvelope.addEventListener("click", function(e) {
+                  var id = this.id
+                  var message = document.getElementById(id).querySelectorAll(".messageContent")[0].innerHTML
+                  var messageBody = document.getElementById("messageBody")
+                  messageBody.innerHTML = "Message: "
+                  messageBody.innerHTML += "<hr/>"
+                  messageBody.innerHTML += message
+                });
             //Let's put our envelopes in our inbox
             var inbox = document.getElementById("inbox");
             inbox.appendChild(messageEnvelope);
