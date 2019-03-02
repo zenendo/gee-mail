@@ -9,16 +9,23 @@
       window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-
-        //Let's try this again.  Instead we're going to loop through all of the messages and grab their attributes
+        var numMessages = 0;
+        //Let's try this again.  Instead we're going to create new messages
         for (var i = 0; i < window.geemails.length; i++) {
         //reference starts at the first message
             var message = window.geemails[i];
-            var messageSubject = message.subject;
-            var messageSender = message.sender;
-            var messageBody = message.body;
-            var messageDate = message.date;
-         // now that we have our messages, we need a envelopes to put them in
+            createNewMessage(message, false);
+            addMessageCount();
+        }
+
+            //every 5 seconds, lets perform this function and get new mail
+            setInterval(function(){
+              var newMessage = window.getNewMessage()
+              createNewMessage(newMessage, true);
+              addMessageCount();
+            }, 5000);
+        
+            // now that we have our messages, we need a envelopes to put them in
 
             var messageEnvelope = document.createElement('div');
             //Let's create a class name for styling and making it easier to grab later
@@ -70,11 +77,6 @@
             messageCount.innerHTML = 'Messages: ' + numMessages;
         }
 
-            //every 5 seconds, lets perform this function and get new mail
-            setInterval(function(){
-            window.getNewMessage()
-                }, 5000)
-            };
 
     </script>
 	</head>
