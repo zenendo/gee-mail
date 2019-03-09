@@ -10,23 +10,24 @@
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
         var numMessages = 0;
-        //Let's try this again.  Instead we're going to loop through and create new messages
+        //Let's try this again. 
         for (var i = 0; i < window.geemails.length; i++) {
         //reference starts at the first message
             var message = window.geemails[i];
-            createNewMessage(message, false);
+            createNewMessage(message);
             addMessageCount();
         }
 
             //every 5 seconds, lets perform this function and get new mail
             setInterval(function(){
               var newMessage = window.getNewMessage()
-              createNewMessage(newMessage, true);
+              createNewMessage(newMessage);
               addMessageCount();
+              updateMessageBodyLocation();
             }, 5000);
         
                         
-            function createNewMessage(message, isNew) {
+            function createNewMessage(message) {
                 var messageSubject = message.subject;
                 var messageSender = message.sender;
                 var messageBody = message.body;
@@ -36,23 +37,43 @@
                 var messageEnvelope = document.createElement('div');
                 //Let's create a class name for styling and making it easier to grab later
                 messageEnvelope.className = 'envelopedMessage';
-                var id = "message-" + i
+                var id = "message-" + numMessages;
+                
                 messageEnvelope.id = id
                 messageEnvelope.addEventListener("click", function(e) {
                   var id = this.id
-                  var message = document.getElementById(id).querySelectorAll(".messageContent")[0].innerHTML
+                  var element = document.getElementById(id)
+                  var subject = element.querySelectorAll(".subject")[0].innerHTML
+                  var sender = element.querySelectorAll(".sender")[0].innerHTML
+                  var message = element.querySelectorAll(".messageContent")[0].innerHTML
+                  
                   var messageBody = document.getElementById("messageBody")
-                  messageBody.innerHTML = "Message: "
+                  var messageEnvelopeId = messageBody.messageEnvelopeId
+                  if (typeof messageEnvelopeId !== 'undefined') {
+                    document.getElementById(messageEnvelopeId).style.backgroundColor = "#D3D3D3"
+                  }
+
+                  if (messageEnvelopeId == id && messageBody.clicked) {
+                    messageBody.style.display = "none"
+                    messageBody.clicked = false
+                  } else {
+                    messageBody.style.display = "block"
+                    messageBody.clicked = true
+                    this.style.backgroundColor = "grey"
+                  }
+                  
+                  messageBody.innerHTML = subject + " (" + sender + ")"
+                  messageBody.innerHTML += "<hr/>"
+                  messageBody.innerHTML += "Message: "
                   messageBody.innerHTML += "<hr/>"
                   messageBody.innerHTML += message
+                  
+                  messageBody.messageEnvelopeId = id
+                  updateMessageBodyLocation()
                 });
                 //Let's put our envelopes in our inbox
                 var inbox = document.getElementById("inbox");
-                if(isNew) {
-                  inbox.prepend(messageEnvelope);
-                } else {
-                  inbox.appendChild(messageEnvelope);
-                }
+                inbox.prepend(messageEnvelope);
 
                 //Now let's create a date stamp to put on / in  the envelope.  It should look like this I think.
                 // <div class="date">
@@ -99,6 +120,18 @@
                 var messageCount = document.getElementById("message-count");
                 messageCount.innerHTML = 'Messages: ' + numMessages;
             }
+        
+            function updateMessageBodyLocation() {
+              var messageBody = document.getElementById("messageBody")
+              var messageEnvelopeId = messageBody.messageEnvelopeId
+
+              if (typeof messageEnvelopeId == 'undefined') {
+                return
+              }
+
+              var pixels = String((numMessages - Number(messageEnvelopeId.replace("message-", "")) - 1)*106) + "px"
+              messageBody.style.top = pixels
+            }
         };
 
     </script>
@@ -112,7 +145,7 @@
             <div id="main-container">
               <div id="inbox">
               </div>
-              <div id="messageBody">
+              <div id="messageBody" style="display: none">
               </div>
             </div>
             
